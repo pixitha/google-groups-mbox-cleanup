@@ -42,6 +42,39 @@ INFO:__main__:Fixed 450 Google From lines
 
 ---
 
+## Before and After
+
+### Before:
+```
+From 6027616436443015462
+X-Google-Language: ENGLISH,ASCII-7-bit
+X-Google-Thread: 106b27,5a841f9366afc02e
+X-Google-Attributes: gid106b27,public
+From: acee@raleigh.ibm.com (Acee Lindem)
+Subject: Re: Selecting routes based on source host names/numbers
+Date: 1996/02/29
+Message-ID: <9602292009.AA15229@heavens-gated.raleigh.ibm.com>#1/1
+X-Deja-AN: 141631199
+organization: University of Illinois at Urbana
+newsgroups: info.gated
+originator: daemon@ux1.cso.uiuc.edu
+```
+
+### After:
+```
+From acee@raleigh.ibm.com Thu Feb 29 00:00:00 1996
+From: acee@raleigh.ibm.com (Acee Lindem)
+Subject: Re: Selecting routes based on source host names/numbers
+Date: Thu, 29 Feb 1996 00:00:00 GMT
+Message-ID: <9602292009.AA15229@heavens-gated.raleigh.ibm.com>#1/1
+X-Deja-AN: 141631199
+organization: University of Illinois at Urbana
+newsgroups: info.gated
+originator: daemon@ux1.cso.uiuc.edu
+```
+
+---
+
 ## Requirements
 
 - Python 3.7+
