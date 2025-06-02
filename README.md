@@ -91,12 +91,6 @@ This script is especially useful if:
 
 ---
 
-## TODO
-
-- [ ] Add support for fixing or inferring message threading (e.g. using `In-Reply-To` and `References` headers)
-
----
-
 ## License
 
 This project is licensed under the **Apache License 2.0**.
