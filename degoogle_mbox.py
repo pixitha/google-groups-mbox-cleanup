@@ -101,7 +101,10 @@ def fix_dates_in_mbox(input_file, output_file):
                 # Parse and format the date
                 try:
                     date = fix_date(date_str)
-                    date_str = date.strftime('%a %b %d %H:%M:%S %Y')
+                    if date is not None:
+                        date_str = date.strftime('%a %b %d %H:%M:%S %Y')
+                    else:
+                        date_str = 'Thu Jan 1 00:00:00 1970'
                 except (AttributeError, ValueError):
                     date_str = 'Thu Jan 1 00:00:00 1970'
                 
@@ -115,6 +118,7 @@ def fix_dates_in_mbox(input_file, output_file):
         total = 0
         fixed_dates = 0
         removed_google_headers = 0
+        preserved_threading = 0
         
         for message in mbox:
             total += 1
@@ -128,11 +132,24 @@ def fix_dates_in_mbox(input_file, output_file):
                     fixed_date_timestamp = int(fixed_date.timestamp())
                     message.replace_header('Date', email.utils.formatdate(fixed_date_timestamp, usegmt=True))
             
+            # Preserve threading headers before removing Google headers
+            threading_headers = {
+                'References': message.get('References', ''),
+                'In-Reply-To': message.get('In-Reply-To', ''),
+                'Message-ID': message.get('Message-ID', '')
+            }
+            
             # Remove X-Google headers
             google_headers = [k for k in message.keys() if k.startswith('X-Google-')]
             for header in google_headers:
                 del message[header]
                 removed_google_headers += 1
+            
+            # Restore threading headers if they existed
+            for header, value in threading_headers.items():
+                if value:
+                    message[header] = value
+                    preserved_threading += 1
             
             fixed_messages.append(message)
         
